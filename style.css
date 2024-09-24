@@ -1,0 +1,117 @@
+body {
+    background-color: black;
+    overflow-x: hidden;
+}
+
+.item {
+    width: 300px;
+    height: 300px;
+    background: #1c1f2b;
+    margin: 150px 0 0 -150px;
+    border: 1;
+    font-size: large;
+    position: absolute;
+    border-radius: 10px;
+    text-align: center;
+    padding: 2em;
+    top: -10%;
+    left: max(calc(300px * 5), 100%);
+    -webkit-animation: 30s scroll linear infinite;
+            animation: 30s scroll linear infinite;
+    -webkit-animation-delay: calc(30s / 5 * (5 - var(--n)) * -1);
+            animation-delay: calc(30s / 5 * (5 - var(--n)) * -1);
+}
+
+.pause-animations .item {
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.item {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .item:hover {
+    transform: scale(1.1);
+  }
+  
+  .item:hover::before {
+    opacity: 1;
+  }
+
+
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.wrapper {
+    width: 90%;
+    height: 600px;
+    max-width: 1536px;
+    margin-inline: auto;
+    position: relative;
+    margin-top: 3em;
+    top: 100px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black, transparent);
+            mask-image: linear-gradient(to right, transparent, black, transparent);
+}
+
+.item::after, .item::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), #3535f7, #b503eb, #f00861, #3535f7);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 2px;
+    border-radius: 10px;
+
+    -webkit-animation: 3s spin linear infinite;
+
+            animation: 3s spin linear infinite;
+}
+.item::before {
+    -webkit-filter: blur(1.5rem);
+            filter: blur(1.5rem);
+    opacity: 0.3;
+}
+
+@-webkit-keyframes spin{
+    from{
+        --angle: 0deg;
+    } 
+    to{
+        --angle: 360deg;
+    }
+}
+
+@keyframes spin{
+    from{
+        --angle: 0deg;
+    } 
+    to{
+        --angle: 360deg;
+    }
+}
+
+@-webkit-keyframes scroll {
+    from {
+        left: 115%;
+    } to {
+        left: -15%
+    }
+}
+
+@keyframes scroll {
+    from {
+        left: 115%;
+    } to {
+        left: -15%
+    }
+}
